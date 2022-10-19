@@ -1,0 +1,40 @@
+package com.springbackend.application.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "product")
+public class Product{
+	@Id
+	@Column(name = "prod_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long prod_id;
+	
+	@Column(name = "prod_name", nullable = false)
+	private String productName;
+	
+	@Column(name = "prod_description")
+	private String productDesc;
+	
+	@Column(name = "prod_price")
+	private long prodPrice;
+	
+	@Column(name = "gender")
+	private String gender;
+	
+	@Column(name = "category")
+	private String category;
+	
+	@Column(name = "rating")
+	private String rating;
+
+	
+}

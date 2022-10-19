@@ -1,0 +1,52 @@
+package com.springbackend.application.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.springbackend.application.model.Product;
+import com.springbackend.application.repository.ProductRepo;
+import com.springbackend.application.service.ProductService;
+
+
+
+@Service
+public class ProductServiceImpl implements ProductService{
+	
+	private ProductRepo productRepository;
+	
+	public ProductServiceImpl(ProductRepo productRepository) {
+		super();
+		this.productRepository = productRepository;
+	}
+
+	@Override
+	public Product saveProduct(Product product) {
+		return productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return employeeRepository.findAll();
+	}
+
+	@Override
+	public Product getProductById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product updateEmployee(Product product, long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteProduct(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

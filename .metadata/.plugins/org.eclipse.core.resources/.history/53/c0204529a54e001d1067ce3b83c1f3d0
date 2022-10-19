@@ -1,0 +1,8 @@
+package com.springbackend.application.service;
+
+import com.springbackend.application.model.Product;
+
+public interface ProductService {
+	Product saveEmployee(Product product);
+	
+}

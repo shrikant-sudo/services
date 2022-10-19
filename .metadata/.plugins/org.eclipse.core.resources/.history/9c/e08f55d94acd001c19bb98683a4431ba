@@ -1,0 +1,27 @@
+package com.springbackend.application.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springbackend.application.model.Employee;
+import com.springbackend.application.repository.EmployeeRepo;
+import com.springbackend.application.service.EmployeeService;
+
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService{
+	
+	private EmployeeRepo employeeRepository;
+	
+	public EmployeeServiceImpl(EmployeeRepo employeeRepository) {
+		super();
+		this.employeeRepository = employeeRepository;
+	}
+
+	@Override
+	public Employee saveEmployee(Employee employee) {
+		return employeeRepository.save(employee);
+	}
+
+
+}

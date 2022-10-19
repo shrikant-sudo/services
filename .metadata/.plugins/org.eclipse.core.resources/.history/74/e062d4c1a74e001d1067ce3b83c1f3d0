@@ -1,0 +1,64 @@
+package com.springbackend.application.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.springbackend.application.exception.ResourceNotFoundException;
+import com.springbackend.application.model.Product;
+import com.springbackend.application.repository.ProductRepo;
+import com.springbackend.application.service.ProductService;
+
+import net.javaguides.springboot.model.Employee;
+
+
+
+@Service
+public class ProductServiceImpl implements ProductService{
+	
+	private ProductRepo productRepository;
+	
+	public ProductServiceImpl(ProductRepo productRepository) {
+		super();
+		this.productRepository = productRepository;
+	}
+
+	@Override
+	public Product saveProduct(Product product) {
+		return productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return productRepository.findAll();
+	}
+
+	@Override
+	public Product getProductById(long prod_id) {
+		// TODO Auto-generated method stub
+		return productRepository.findById(prod_id).orElseThrow(() -> new ResourceNotFoundException("Product", "prod_id", prod_id));
+	}
+
+	@Override
+	public Product updateEmployee(Product product, long prod_id) {
+		// TODO Auto-generated method stub
+		// we need to check whether employee with given id is exist in DB or not
+		Product existingEmployee = productRepository.findById(prod_id).orElseThrow(
+				() -> new ResourceNotFoundException("Product", "Id", prod_id)); 
+		
+		existingEmployee.setFirstName(employee.getFirstName());
+		existingEmployee.setLastName(employee.getLastName());
+		existingEmployee.setEmail(employee.getEmail());
+		// save existing employee to DB
+		employeeRepository.save(existingEmployee);
+		return existingEmployee;
+	}
+
+	@Override
+	public void deleteProduct(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

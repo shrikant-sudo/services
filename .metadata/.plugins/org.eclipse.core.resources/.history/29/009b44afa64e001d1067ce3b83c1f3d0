@@ -1,0 +1,40 @@
+package com.springbackend.controller;
+
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springbackend.application.model.Product;
+import com.springbackend.application.service.ProductService;
+
+
+
+@RestController
+@RequestMapping("/api")
+public class SpringController {
+	
+	private ProductService productService;
+
+	public SpringController(ProductService productService) {
+		super();
+		this.productService = productService;
+	}
+
+	@PostMapping("/save-product")
+	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+		return new ResponseEntity<Product>(productService.saveProduct(product), HttpStatus.CREATED);
+	}
+	// build get all employees REST API
+	@GetMapping("products/")
+	public List<Product> getAllEmployees(){
+		return employeeService.getAllEmployees();
+	}
+	
+		
+}

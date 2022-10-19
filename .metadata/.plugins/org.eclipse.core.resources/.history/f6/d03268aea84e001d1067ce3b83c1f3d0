@@ -1,0 +1,68 @@
+package com.springbackend.application.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.springbackend.application.exception.ResourceNotFoundException;
+import com.springbackend.application.model.Product;
+import com.springbackend.application.repository.ProductRepo;
+import com.springbackend.application.service.ProductService;
+
+
+
+@Service
+public class ProductServiceImpl implements ProductService{
+	
+	private ProductRepo productRepository;
+	
+	public ProductServiceImpl(ProductRepo productRepository) {
+		super();
+		this.productRepository = productRepository;
+	}
+
+	@Override
+	public Product saveProduct(Product product) {
+		return productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return productRepository.findAll();
+	}
+
+	@Override
+	public Product getProductById(long prod_id) {
+		// TODO Auto-generated method stub
+		return productRepository.findById(prod_id).orElseThrow(() -> new ResourceNotFoundException("Product", "prod_id", prod_id));
+	}
+
+	@Override
+	public Product updateEmployee(Product product, long prod_id) {
+		// TODO Auto-generated method stub
+		// we need to check whether employee with given id is exist in DB or not
+		Product existingProduct = productRepository.findById(prod_id).orElseThrow(
+				() -> new ResourceNotFoundException("Product", "prod_id", prod_id)); 
+		
+		existingProduct.setProductName(product.getProductName());
+		existingProduct.setProductDesc(product.getProductDesc());
+		existingProduct.setProdprice(product.getProdprice());
+		
+		existingProduct.setGender(product.getGender());
+		existingProduct.setCategory(product.getCategory());
+		existingProduct.setRating(product.getRating());
+		// save existing employee to DB
+		productRepository.save(existingProduct);
+		return existingProduct;
+	}
+
+	@Override
+	public void deleteProduct(long prod_id) {
+		// check whether a employee exist in a DB or not
+		productRepository.findById(id).orElseThrow(() -> 
+								new ResourceNotFoundException("Product", "prod_id", prod_id));
+		productRepository.deleteById(id);
+	}
+
+}
